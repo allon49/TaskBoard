@@ -15,7 +15,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         fileio.cpp \
-        main.cpp
+        jsontomodel.cpp \
+        main.cpp \
+        qjsonmodel.cpp
 
 RESOURCES += qml.qrc
 
@@ -31,4 +33,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    fileio.h
+    fileio.h \
+    jsontomodel.h \
+    qjsonmodel.h

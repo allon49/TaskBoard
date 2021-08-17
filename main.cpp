@@ -1,6 +1,10 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include "fileio.h"
+#include "qjsonmodel.h"
+#include "jsontomodel.h"
+
+
 
 int main(int argc, char *argv[])
 {
@@ -11,6 +15,7 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
 
     qmlRegisterType<FileIO>("gcompris_tasks", 1, 0, "FileIO");
+    qmlRegisterType<JsonToModel>("gcompris_tasks", 1, 0, "JsonToModel");
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

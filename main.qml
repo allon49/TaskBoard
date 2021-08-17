@@ -13,6 +13,9 @@ Window {
 
     Component.onCompleted: {
        applicationWindow.readDocument(":/Data.json")
+       applicationWindow.readModelFromJson(":/Data.json")
+
+
     }
 
     Rectangle {
@@ -97,4 +100,28 @@ Window {
         console.log(JSON.stringify(visualModel.model))
 
     }
+
+
+    JsonToModel {
+        id: jsonModel
+    }
+
+    function readModelFromJson(url) {
+        jsonModel.source = url
+
+        console.log("jsonModel.source: " + jsonModel.source)
+        jsonModel.read()
+        console.log("display model")
+        console.log("jsonModel.text:" + jsonModel.text)
+
+
+        //visualModel.model = JSON.parse(jsonModel.text)
+
+        console.log("display visualModel.model ")
+        console.log(JSON.stringify(visualModel.model))
+
+
+
+    }
+
 }

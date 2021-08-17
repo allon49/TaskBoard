@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.12
 import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.12
 
@@ -30,16 +30,21 @@ Popup {
             height: 30
             border.color: "grey"
             border.width: 1
+            color: titleTextInput.focus ? "red" : "green"
 
             TextInput {
                  id: titleTextInput
 
+                 leftPadding: 5
                  anchors.fill: parent
-                 anchors.margins: 5
+                 //anchors.margins: 5
                  width: parent.width
-                 focus: true
                  color: "black"
                  text: taskTitle
+                 selectByMouse : true
+                 focus: true
+                 KeyNavigation.right: descriptionTextEdit
+
             }
         }
 
@@ -47,20 +52,22 @@ Popup {
         Rectangle {
             id: descriptionTextEditRectangle
 
+            color: focus ? "red" : "lightgray"
             width: parent.width
             height: descriptionTextEdit.contentHeight < 70 ? 70 : descriptionTextEdit.contentHeight
             border.color: "grey"
             border.width: 1
+            KeyNavigation.right: saveButton
 
             TextEdit {
                 id: descriptionTextEdit
 
                 anchors.fill: parent
+                leftPadding: 5
                 focus: true
                 wrapMode: TextEdit.Wrap
-
+                selectByMouse : true
                 color: "black"
-
                 text: taskDescription
             }
 
@@ -79,6 +86,7 @@ Popup {
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
                 anchors.right: parent.right
+                KeyNavigation.tab: cancelButton
 
                 palette {
                        button: "green"
@@ -104,6 +112,7 @@ Popup {
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
                 text: qsTr("Cancel")
+                KeyNavigation.tab: titleTextInput
 
                 onClicked: {
                    console.log("cancel...")
