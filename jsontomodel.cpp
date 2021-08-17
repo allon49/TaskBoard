@@ -82,6 +82,6 @@ void JsonToModel::setText(QString text)
         return;
 
     m_text = text;
-    emit textChanged(text);
+//    emit textChanged(text);
 }
 

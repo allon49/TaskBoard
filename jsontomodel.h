@@ -23,7 +23,7 @@ public slots:
     void setText(QString text);
 signals:
     void sourceChanged(QString arg);
-    void textChanged(QString arg);
+    void textChanged(QJsonModel *arg);
 private:
     QString m_source;
     QString m_source_string;
