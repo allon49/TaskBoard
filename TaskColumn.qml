@@ -5,6 +5,7 @@ Item {
     id: columnTaskItem
 
     property int taskColumnIndex
+    property var taskOriginColumnIndex
 
     height: columnHeaderDragArea.height
     width: root.taskWidth
@@ -29,7 +30,25 @@ Item {
             drag.axis: Drag.XAxis
 
             onPressAndHold: held = true
-            onReleased: held = false
+
+            onPressed: {
+                taskOriginColumnIndex = taskColumnIndex
+            }
+
+            onReleased: {
+                held = false
+                var tmpData = visualModel.model
+                console.log("taskOriginColumnIndex: " + taskOriginColumnIndex)
+                console.log("columnHeaderDragArea.taskColumnIndex: " + columnHeaderDragArea.taskColumnIndex)
+                tmpData.splice(columnHeaderDragArea.taskColumnIndex, 0, tmpData.splice(taskOriginColumnIndex, 1)[0]);
+
+                //arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
+
+                visualModel.model = tmpData
+                console.log("release move")
+            }
+
+
 
             Rectangle {
                 id: taskColumnHeader
@@ -98,7 +117,7 @@ Item {
                     console.log("drag.source.taskColumnIndex: " + drag.source.taskColumnIndex)
                     console.log("columnHeaderDragArea.taskColumnIndex: " + columnHeaderDragArea.taskColumnIndex)
 
-                    visualModel.model.move(
+                    visualModel.items.move(
                             drag.source.taskColumnIndex,
                             columnHeaderDragArea.taskColumnIndex)
                 }
