@@ -5,6 +5,7 @@ Item {
 
     property int taskColumnIndex
     property int taskIndex
+    property int taskOriginIndex
 
     height: taskAndPlaceholderColumn.height
     width: parent.width
@@ -67,6 +68,12 @@ Item {
             width: parent.width
             drag.target: taskAndPlaceholderColumn
 
+
+            onPressed: {
+                taskOriginIndex = taskIndex
+
+            }
+
             onPressAndHold: {    //I don't understand why I do not have to wait a few seconds before press works
                 heldTask = true
                 console.log("tt")
@@ -80,6 +87,14 @@ Item {
                 taskAndPlaceholderColumn.parent = taskItem
                 taskAndPlaceholderColumn.x = 0
                 taskAndPlaceholderColumn.y = 0
+
+                if (taskDragArea.taskColumnIndex === drag.source.taskColumnIndex) {
+                    var tmpData = visualModel.model
+                    console.log("taskOriginIndex: " + taskOriginIndex)
+                    console.log("taskDragArea.taskIndex: " + taskDragArea.taskIndex)
+                    tmpData[taskColumnIndex].tasks.splice(taskDragArea.taskIndex, 0, tmpData[taskColumnIndex].tasks.splice(taskOriginIndex, 1)[0]);
+                    visualModel.model = tmpData
+                }
             }
 
             onClicked: {

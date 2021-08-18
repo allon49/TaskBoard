@@ -41,9 +41,6 @@ Item {
                 console.log("taskOriginColumnIndex: " + taskOriginColumnIndex)
                 console.log("columnHeaderDragArea.taskColumnIndex: " + columnHeaderDragArea.taskColumnIndex)
                 tmpData.splice(columnHeaderDragArea.taskColumnIndex, 0, tmpData.splice(taskOriginColumnIndex, 1)[0]);
-
-                //arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
-
                 visualModel.model = tmpData
                 console.log("release move")
             }
